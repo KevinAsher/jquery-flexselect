@@ -923,7 +923,7 @@ function createStripDiacritics() {
         group = $(this).parent("optgroup").attr("label");
         text = indexGroup ? [name, group].join(" ") : name;
         disabled = $(this).parent("optgroup").attr("disabled") || $(this).attr('disabled');
-        return { text: that.stripDiacritics($.trim(text)), name: $.trim(name), value: $(this).val(), disabled: disabled, score: 0.0 };
+        return { text: that.stripDiacritics($.trim(text)), name: $.trim(name), nameWithoutDiacritics: that.stripDiacritics($.trim(name)),  value: $(this).val(), disabled: disabled, score: 0.0 };
       });
     },
 
@@ -1110,7 +1110,7 @@ function createStripDiacritics() {
     },
 
     sortResultsByName: function() {
-      this.results.sort(function(a, b) { return a.name < b.name ? -1 : (a.name > b.name ? 1 : 0); });
+      this.results.sort(function(a, b) { return a.nameWithoutDiacritics < b.nameWithoutDiacritics ? -1 : (a.nameWithoutDiacritics > b.nameWithoutDiacritics ? 1 : 0); });
     },
 
     renderDropdown: function() {
